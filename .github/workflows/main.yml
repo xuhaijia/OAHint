@@ -1,0 +1,36 @@
+name: Weekly Friday Task
+
+on:
+  schedule:
+    # UTC时间 = 北京时间 - 8小时
+    # 每周五17:00（北京时间） = 每周五9:00（UTC）
+    - cron: '0 9 * * FRI'  # 每周五UTC时间9:00执行（北京时间17:00）
+  
+  # 可选：添加手动触发按钮
+  workflow_dispatch:
+
+jobs:
+  execute-task:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai  # 设置脚本内时区为北京时间
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    # 设置Python环境（根据你的需求选择）
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    
+    # 安装依赖
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    
+    # 执行主任务
+    - name: Run weekly task
+      run: |
+        echo "当前时间: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+        python oahint.py
