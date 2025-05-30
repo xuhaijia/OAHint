@@ -20,5 +20,5 @@ def bot(robot_webhook,text):
         print(f"消息发送失败，状态码：{response.status_code}")
 if __name__ == '__main__':
     url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=ce352bce-d4ac-40c8-bd84-25c45f96e44b'
-    text = "git actions 测试"
+    text = "定时提醒：个人日报填报"
     bot(url, text)
